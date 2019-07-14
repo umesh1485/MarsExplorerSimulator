@@ -15,6 +15,7 @@ public class MarsExplorerUtil {
 			System.out.println("requested unit " + requestedForUnit + " can't be blocked");
 		} else {
 			MarsExplorerData.blockedUnits.add(requestedForUnit);
+			MarsExplorerData.path.add(x+","+y);
 		}
 	}
 
