@@ -15,7 +15,6 @@ public class MarsExplorerUtil {
 			System.out.println("requested unit " + requestedForUnit + " can't be blocked");
 		} else {
 			MarsExplorerData.blockedUnits.add(requestedForUnit);
-			MarsExplorerData.path.add(x+","+y);
 		}
 	}
 
@@ -97,6 +96,7 @@ public class MarsExplorerUtil {
 		MarsExplorerData.exploredUnits.clear();
 		MarsExplorerData.blockedUnits.clear();
 		MarsExplorerData.exploredUnits.add(x + "," + y);
+		MarsExplorerData.path.add(x+","+y);
 	}
 
 	private static String getMovementFromCurrentPosition(int targetX, int targetY) {
