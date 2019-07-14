@@ -1,0 +1,1 @@
+E:\WORKSPACE\MarsExplorerSimulator>java -jar MarsExplorerSimulator.jar
