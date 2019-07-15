@@ -11,6 +11,7 @@ import com.mars.explorer.util.MarsExplorerUtil;
 
 public class TestMarsExplorerUtil {
 
+	// this single test will cover PLACE, BLOCK, EXPLORER, REPORT
 	@Test
 	public void testPlaceBlockExplorerReport(){
 		MarsExplorerUtil.place(0, 0);

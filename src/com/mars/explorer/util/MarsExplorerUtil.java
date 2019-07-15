@@ -1,7 +1,6 @@
 package com.mars.explorer.util;
 
 import java.awt.geom.Point2D;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 import com.mars.explorer.data.MarsExplorerData;
@@ -10,21 +9,24 @@ public class MarsExplorerUtil {
 
 	public static void block(int x, int y) {
 		String requestedForUnit = x + "," + y;
-		if (MarsExplorerData.blockedUnits.contains(requestedForUnit)
-				&& requestedForUnit.equals(MarsExplorerData.currentPosition)) {
-			System.out.println("requested unit " + requestedForUnit + " can't be blocked");
+		if (x >= 0 && x < 6 && y >= 0 && y < 6) {
+			if (MarsExplorerData.blockedUnits.contains(requestedForUnit)
+					&& requestedForUnit.equals(MarsExplorerData.currentPosition)) {
+				System.out.println("requested unit " + requestedForUnit + " can't be blocked");
+			} else {
+				MarsExplorerData.blockedUnits.add(requestedForUnit);
+			}
 		} else {
-			MarsExplorerData.blockedUnits.add(requestedForUnit);
+			System.out.println("position " + x + "," + y + " is out of range [5][5]");
 		}
 	}
 
 	public static void explorer(int x, int y) {
-		if (x >= 0 && x < 6 && y >= 0 && y < 6 && !MarsExplorerData.blockedUnits.contains(x+","+y)) {
-			String sourcePosition = MarsExplorerData.currentPosition;
+		if (x >= 0 && x < 6 && y >= 0 && y < 6 && !MarsExplorerData.blockedUnits.contains(x + "," + y)) {
 			while (!MarsExplorerData.currentPosition.equals(x + "," + y)) {
 				String nearestMove = getNearestMove(x, y);
 
-				if (nearestMove.equals(x+","+y)) {
+				if (nearestMove.equals(x + "," + y)) {
 					MarsExplorerData.exploredUnits.add(nearestMove);
 				}
 				MarsExplorerData.currentPosition = nearestMove;
@@ -72,7 +74,6 @@ public class MarsExplorerUtil {
 			if (!MarsExplorerData.blockedUnits.contains(ymoveup)) {
 				String[] movesArr = ymoveup.split(",");
 				Double diff = Point2D.distance(Double.parseDouble(movesArr[0]), Double.parseDouble(movesArr[1]), x, y);
-
 				possibleMove.put(diff, ymoveup);
 			}
 		}
@@ -82,36 +83,25 @@ public class MarsExplorerUtil {
 	}
 
 	public static void report() {
-		if(!MarsExplorerData.path.isEmpty()){
-			System.out.println("path  "+MarsExplorerData.path.toString());
-			MarsExplorerData.path.clear();
+		if (!MarsExplorerData.path.isEmpty()) {
+			System.out.println("path  " + MarsExplorerData.path.toString());
 		}
+
 		System.out.println("E: " + MarsExplorerData.exploredUnits.toString());
 		System.out.println("B: " + MarsExplorerData.blockedUnits.toString());
 	}
 
 	public static void place(int x, int y) {
-
-		MarsExplorerData.currentPosition = x + "," + y;
-		MarsExplorerData.exploredUnits.clear();
-		MarsExplorerData.blockedUnits.clear();
-		MarsExplorerData.exploredUnits.add(x + "," + y);
-		MarsExplorerData.path.add(x+","+y);
-	}
-
-	private static String getMovementFromCurrentPosition(int targetX, int targetY) {
-		int currentX = Integer.parseInt(MarsExplorerData.currentPosition.split(",")[0]);
-		int currentY = Integer.parseInt(MarsExplorerData.currentPosition.split(",")[1]);
-		if (targetX - currentX != 0 && (targetX - currentX) > 0) {
-			return "X-forward";
-		} else if (targetX - currentX != 0 && (targetX - currentX) < 0) {
-			return "X-downward";
-		} else if (targetY - currentY != 0 && (targetY - currentY) > 0) {
-			return "Y-forward";
-		} else if (targetY - currentY != 0 && (targetY - currentY) < 0) {
-			return "Y-downward";
-		} else {
-			return "";
+		if (x >= 0 && x < 6 && y >= 0 && y < 6) {
+			MarsExplorerData.currentPosition = x + "," + y;
+			MarsExplorerData.exploredUnits.clear();
+			MarsExplorerData.blockedUnits.clear();
+			MarsExplorerData.exploredUnits.add(x + "," + y);
+			MarsExplorerData.path.clear();
+			MarsExplorerData.path.add(x + "," + y);
+		}else {
+			System.out.println("Cannot PLACE : "+x+","+y);
 		}
 	}
+
 }
