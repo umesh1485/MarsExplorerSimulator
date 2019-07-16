@@ -5,12 +5,10 @@ import java.util.List;
 
 import org.junit.gen5.api.Assertions;
 import org.junit.gen5.api.Test;
-import org.junit.runner.RunWith;
-
 import com.mars.explorer.data.MarsExplorerData;
 import com.mars.explorer.util.MarsExplorerUtil;
 
-@RunWith(JUnitPlatform.class)
+
 public class TestMarsExplorerUtil {
 
 	// this single test will cover PLACE, BLOCK, EXPLORER, REPORT
