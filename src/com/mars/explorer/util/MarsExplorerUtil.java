@@ -12,12 +12,12 @@ public class MarsExplorerUtil {
 		if (x >= 0 && x < 6 && y >= 0 && y < 6) {
 			if (MarsExplorerData.blockedUnits.contains(requestedForUnit)
 					&& requestedForUnit.equals(MarsExplorerData.currentPosition)) {
-				System.out.println("requested unit " + requestedForUnit + " can't be blocked");
+				System.out.println("\n requested unit " + requestedForUnit + " can't be blocked \n");
 			} else {
 				MarsExplorerData.blockedUnits.add(requestedForUnit);
 			}
 		} else {
-			System.out.println("position " + x + "," + y + " is out of range [5][5]");
+			System.out.println("\n position " + x + "," + y + " is out of range [5][5] \n");
 		}
 	}
 
@@ -33,7 +33,7 @@ public class MarsExplorerUtil {
 				MarsExplorerData.path.add(nearestMove);
 			}
 		} else {
-			System.out.println("could not explored: " + x + "," + y);
+			System.out.println("\n could not explored: " + x + "," + y+" \n");
 		}
 	}
 
@@ -83,7 +83,7 @@ public class MarsExplorerUtil {
 	}
 
 	public static void report() {
-		if (!MarsExplorerData.path.isEmpty()) {
+		if (MarsExplorerData.path.size()>1) {
 			System.out.println("path  " + MarsExplorerData.path.toString());
 		}
 
@@ -100,7 +100,7 @@ public class MarsExplorerUtil {
 			MarsExplorerData.path.clear();
 			MarsExplorerData.path.add(x + "," + y);
 		}else {
-			System.out.println("Cannot PLACE : "+x+","+y);
+			System.out.println("\n Cannot PLACE : "+x+","+y+" \n");
 		}
 	}
 
