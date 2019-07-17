@@ -9,7 +9,8 @@ public class MarsExplorerUtil {
 
 	public static void block(int x, int y) {
 		String requestedForUnit = x + "," + y;
-		if (x >= 0 && x < 6 && y >= 0 && y < 6) {
+		boolean isPlaced = MarsExplorerData.path.size()>=1;
+		if (isPlaced && x >= 0 && x < 6 && y >= 0 && y < 6) {
 			if (MarsExplorerData.blockedUnits.contains(requestedForUnit)
 					&& requestedForUnit.equals(MarsExplorerData.currentPosition)) {
 				System.out.println("\n requested unit " + requestedForUnit + " can't be blocked \n");
@@ -22,7 +23,8 @@ public class MarsExplorerUtil {
 	}
 
 	public static void explorer(int x, int y) {
-		if (x >= 0 && x < 6 && y >= 0 && y < 6 && !MarsExplorerData.blockedUnits.contains(x + "," + y)) {
+		boolean isPlaced = MarsExplorerData.path.size()>=1;
+		if (isPlaced && x >= 0 && x < 6 && y >= 0 && y < 6 && !MarsExplorerData.blockedUnits.contains(x + "," + y)) {
 			while (!MarsExplorerData.currentPosition.equals(x + "," + y)) {
 				String nearestMove = getNearestMove(x, y);
 
